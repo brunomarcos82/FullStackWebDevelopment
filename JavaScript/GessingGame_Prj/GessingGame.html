@@ -23,9 +23,9 @@
         no_match = check_gess(user_colour, manycolours, randomcolour);
         attempts++;
         //as a secure control if the iteration was greater than 30 times interrup it
-        if (attempts > 20) {
+        if (attempts >= 10) {
           alert("Numer of attempts exceeded 20 times. Try it again!");
-          no_match = true;
+          no_match = false;
         }
       }
       alert("Total of Attemps were: " + attempts);
