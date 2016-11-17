@@ -13,15 +13,26 @@
         var counter = 1;
         controle = prompt("How many time to execute Do Loop? ");
         do {
+          //Division remainder check and switch(former case)
+          //switch does the same as case does in abap. Remember, break parameter avoid the next case be checked.
+          rest = counter % 2;
 
-          document.write("<hr> This is a counter of execution performed by the loop based on the user choice: " + counter);
+          switch (rest) {
+            case 1:
+              document.write("<hr> Odd Number " + counter + "...-->");
+              break;
+            case 0:
+              document.write("<hr> Even Number " + counter + "...-->");
+              break;
+            default:
+          }
+          document.write(" This is a counter of execution performed by the loop based on the user choice: " + counter);
           counter++;
         } while (counter <= controle);
 
       }
     </script>
   </head>
-
 
   <body>
     <section>
