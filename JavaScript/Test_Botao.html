@@ -1,0 +1,37 @@
+<doctype html>
+  <html>
+
+  <head>
+    <meta name="description" content="Test of loops in JavaScript">
+    <meta name="Author" content="Bruno Marcos">
+    <title> FULL STACK WEB DEVELOPMENT [JavaScripts.Buttons] </title>
+
+    <!-- This example shows how to create a button to execute a JavaScript Code. -->
+
+    <script>
+      function DoLoop() {
+        var counter = 1;
+        controle = prompt("How many time to execute Do Loop? ");
+        do {
+
+          document.write("<hr> This is a counter of execution performed by the loop based on the user choice: " + counter);
+          counter++;
+        } while (counter <= controle);
+
+      }
+    </script>
+  </head>
+
+
+  <body>
+    <section>
+      <h1> FULL STACK WEB DEVELOPMENT [JavaScripts.Buttons] </h1>
+
+      <!-- Chamada das funções through a button push inside HTMl-->
+      <button type="button" onclick="DoLoop()"> Click Here </button>
+
+    </section>
+
+  </body>
+
+  </html>

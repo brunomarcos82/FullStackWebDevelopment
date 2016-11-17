@@ -12,8 +12,8 @@
       function TestWhile(controle) {
         var counter = 1;
         while (counter <= controle) {
-          document.write("<br> Esta é a repetição de número " + counter + "do total de: " + controle );
-          document.write("\n");
+          document.write("<hr> Esta é a repetição de número " + counter + " do total de: " + controle  );
+
 
           counter++
         }
@@ -31,7 +31,7 @@
 
       <script>
 
-        TestWhile(50);
+        TestWhile(prompt("How many time should the loop be executed? "));
 
       </script>
 
