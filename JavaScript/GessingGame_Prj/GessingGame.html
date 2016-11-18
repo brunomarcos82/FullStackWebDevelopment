@@ -5,7 +5,18 @@
   <Meta name="author" description="Bruno Marcos">
   <title> Gessing Game Project</title>
   <script>
+    // ********************* FUNCTIONS **********************
+
+    //Function to return upper caso for all array's element
+    function f_UpperCase(array2) {
+      for (i = 0; i < array2.length; i++) {
+        array2[i] = array2[i].toUpperCase();
+      }
+      return array2
+    }
+
     function do_game() {
+
       //Variables
       manycolours = ["Aquamarine", "Black", "Blue", "Brown", "Coral", "Navy", "Pink", "Snow", "Violet", "White", "Yellow"];
       var randomcolour;
@@ -16,13 +27,17 @@
 
       //logic
       randomcolour = manycolours[Math.floor((Math.random() * manycolours.length))]; //random color chosen
-
+      randomcolour = randomcolour.toUpperCase();
       while (no_match) {
+
         //user color's choice
         user_colour = prompt("JavaScript\n\n I am thinking one of these colors: \n\n " + manycolours.join(" , ") + "\n\n What color am I thinking of?", "Enter Here");
-        no_match = check_gess(user_colour, manycolours, randomcolour);
+        user_colour = user_colour.toUpperCase();
+        var list_colour = manycolours.slice();
+        no_match = check_gess(user_colour, list_colour, randomcolour);
         attempts++;
-        //as a secure control if the iteration was greater than 30 times interrup it
+
+        //as a secure control if the iteration was greater than 10 times interrup it
         if (attempts >= 10) {
           alert("Numer of attempts exceeded 20 times. Try it again!");
           no_match = false;
@@ -33,6 +48,10 @@
 
     function check_gess(u_colour, range_colour, rand_colour) {
       var validation = false;
+      var range_colour;
+
+      range_colour = f_UpperCase(range_colour);
+
       if (!range_colour.includes(u_colour)) {
         alert("I do not recognize it!. Enter with a color from the list!");
         return validation = true;
@@ -50,13 +69,13 @@
         myBody.style.background = u_colour;
         return validation = false;
       }
-
     }
   </script>
 </head>
 
 <body>
   <script>
+    // ***** Main Program *****
     do_game();
   </script>
 </body>
