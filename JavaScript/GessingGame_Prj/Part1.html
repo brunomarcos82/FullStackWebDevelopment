@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+<head>
+  <Meta name="author" description="Bruno Marcos">
+  <title> Gessing Game Project</title>
+  <script>
+    // ********************* FUNCTIONS **********************
+
+    //Function to return upper caso for all array's element
+    function f_UpperCase(array2) {
+      for (i = 0; i < array2.length; i++) {
+        array2[i] = array2[i].toUpperCase();
+      }
+      return array2
+    }
+
+    function do_games() {
+
+      //Variables
+      manycolours = ["Aquamarine", "Black", "Blue", "Brown", "Coral", "Navy", "Pink", "Snow", "Violet", "White", "Yellow"];
+      var randomcolour;
+      var user_colour;
+      var attempts;
+      var no_match = true;
+      attempts = 0;
+
+      //logic
+      randomcolour = manycolours[Math.floor((Math.random() * manycolours.length))]; //random color chosen
+      randomcolour = randomcolour.toUpperCase();
+      while (no_match) {
+
+        //user color's choice
+        user_colour = prompt("JavaScript\n\n I am thinking one of these colors: \n\n " + manycolours.join(" , ") + "\n\n What color am I thinking of?", "Enter Here");
+        user_colour = user_colour.toUpperCase();
+        var list_colour = manycolours.slice();
+        no_match = check_gess(user_colour, list_colour, randomcolour);
+        attempts++;
+
+        //as a secure control if the iteration was greater than 10 times interrup it
+        if (attempts >= 10) {
+          alert("Numer of attempts exceeded 20 times. Try it again!");
+          no_match = false;
+        }
+      }
+      alert("Total of Attemps were: " + attempts);
+    };
+
+    function check_gess(u_colour, range_colour, rand_colour) {
+      var validation = false;
+
+      if (u_colour != rand_colour) {
+        alert("Color Choice Wrong it Again!");
+        return validation = true;
+      } else {
+        alert("Congratulations!");
+
+        // Set the background color accordingly with user choise
+        myBody = document.getElementsByTagName("body")[0];
+        myBody.style.background = u_colour;
+        return validation = false;
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <script>
+  do_games()
+  </script>
+</body>
+
+</htm>
