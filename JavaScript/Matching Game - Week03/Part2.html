@@ -2,44 +2,59 @@
 <html>
 
 <head>
-<style>
-img {position: absolute}
-div {position: absolute}
-#rightSide {left: 500px; border-left: 1px solid black}
+  <style>
+    img {
+      position: absolute
+    }
 
+    div {
+      position: absolute
+    }
 
-</style>
+    #rightSide {
+      left: 500px;
+      border-left: 1px solid black
+    }
+  </style>
 </head>
-<body id="theBody" onload="do_something()">
+
+<body id="theBody" onload="generateFaces()">
   <h1> Matching Game </h1>
   <p> Click on the extra similing face on the left. </p>
-  <div id="leftSide" style= "width:500px; height:500px" >
-LEFT
+  <div id="leftSide" style="width:500px; height:500px">
+    LEFT
   </div>
-  <div id="rightSide" style="width:500px; height:500px" >
+  <div id="rightSide" style="width:500px; height:500px">
 
-RIGHT
+    RIGHT
 
 
   </div>
 
 
-<script>
+  <script>
+    function generateFaces() {
+      var numberOfFaces = 5;
 
+      function rand() {
+        var num;
+        num = Math.floor((Math.random() * 401));
+        return num;
+      }
 
-function generateFaces(){
-var numberOfFaces = 5;
-var theLeftSide = document.getElementById("leftSide");
-var theImg = document.createElement("img");
-theImg.src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
-theLeftSide.appendChild(theImg);
-}
-</script>
-
-
-<div style="position: absolute; top:50px; left:460px">
-<button type="button" onclick="generateFaces()"> Click Here </button>
-</div>
+      for (index = 0; index < numberOfFaces; index++) {
+        var theLeftSide = document.getElementById("leftSide");
+        var theImg = document.createElement("img");
+        theImg.src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
+        theImg.style.top = rand() + "px";
+        theImg.style.left = rand() + "px";
+        theLeftSide.appendChild(theImg);
+      }
+    }
+  </script>
+  <div style="position: absolute; top:50px; left:460px">
+    <button type="button" onclick="generateFaces()"> Click Here </button>
+  </div>
 
 </body>
 
