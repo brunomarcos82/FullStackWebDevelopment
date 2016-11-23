@@ -46,6 +46,8 @@
 
 
 
+      delete_all_children()
+
       for (index = 0; index < numberOfFaces; index++) {
         var theImg = document.createElement("img");
         theImg.src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
@@ -54,9 +56,42 @@
         theLeftSide.appendChild(theImg);
       }
 
+      var theNode = theLeftSide;
+      var theClone = theNode.cloneNode(true);
+      theClone.removeChild(theClone.lastChild);
+      theRightSide.appendChild(theClone); //append executed in the right side
+
+      theLeftSide.lastChild.onclick = function nextLevel(event) {
+
+        event.stopPropagation();
+
+        numberOfFaces += 5;
+
+        generateFaces(numberOfFaces);
+
+      };
+
+      theBody.onclick = function gameOver() {
+
+        alert("Game Over!");
+
+        theBody.onclick = null;
+
+        theLeftSide.lastChild.onclick = null;
+
+      };
+
     };
 
+    function delete_all_children() {
+      var theNode1 = document.getElementById("leftSide");
+      while (theNode1.firstChild)
+        theNode1.removeChild(theNode1.firstChild);
 
+      var theNode2 = document.getElementById("rightSide");
+      while (theNode2.firstChild)
+        theNode2.removeChild(theNode2.firstChild);
+    }
   </script>
 
 
