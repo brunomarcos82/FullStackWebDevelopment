@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- this code uses time -->
+<head>
+    <title></title>
+    <style>
+        #rightSide {
+            left: 50%;
+            border-left: 1px solid black;
+            width: 674.5px;
+            height: 500px;
+            position: absolute;
+        }
+
+        #leftSide {
+            left: 0px;
+            width: 674.5px;
+            height: 500px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body onload="generateFaces()">
+    <h1>Matching Game</h1>
+    <div>
+        <p>
+            Click on the extra smiling face on the left
+        </p>
+    </div>
+    <input type="text" id="timer" />
+    <div id="leftSide">
+
+    </div>
+    <div id="rightSide">
+
+    </div>
+    <script>
+        var numberOfFace = 5;
+        var x_position = 0;
+        var y_position = 0;
+        var theLeftSide = document.getElementById("leftSide");
+        var theRightSide = document.getElementById("rightSide");
+        var theBody = document.getElementsByTagName("body")[0];
+        var leftSideImages;
+        var do_timer;
+        var timer = 15;
+        var score = 0;
+        function generateFaces() {
+            for (var i = 0; i < numberOfFace; i++) {
+                x_position = Math.floor(Math.random() * 574);
+                y_position = Math.floor(Math.random() * 401);
+                var Image = document.createElement("img");
+                Image.src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
+                Image.style.position = "absolute";
+                Image.style.width = 100 + "px";
+                Image.style.height = 100 + "px";
+                Image.style.left = x_position + "px";
+                Image.style.top = y_position + "px";
+                theLeftSide.appendChild(Image);
+            }
+            leftSideImages = theLeftSide.cloneNode(true);
+            leftSideImages.removeChild(leftSideImages.childNodes[numberOfFace]);// childNode[0] is space
+            theRightSide.appendChild(leftSideImages);
+            document.getElementById("timer").value = "Time :"+timer;
+            do_timer = setInterval(do_function, 1000);
+
+            theLeftSide.lastChild.onclick = function nextLevel(event) {
+                event.stopPropagation();
+                timer = 15;
+                for (var i = 0; i < numberOfFace; i++) {
+                    theLeftSide.removeChild(theLeftSide.lastChild);
+                }
+                theRightSide.removeChild(theRightSide.lastChild);
+                numberOfFace = numberOfFace + 5;
+                score++;
+                clearInterval(do_timer);
+                generateFaces();
+                alert("next level");
+            };
+
+            theBody.onclick = function gameOver() {
+                alert("Game over!\n\n"+"Your's score is : "+score);
+                theBody.onclick = null;
+                theLeftSide.lastChild.onclick = null;
+                clearInterval(do_timer);
+                theLeftSide.lastChild.style.backgroundColor = "red";
+            };
+        }
+        function do_function() {
+            if (timer > 0) {
+                timer = timer - 1;
+                document.getElementById("timer").value ="Time :" + timer;
+            }
+            else {
+                alert("Game over!\n\n" + "Your's score is : " + score);
+                theBody.onclick = null;
+                theLeftSide.lastChild.onclick = null;
+                clearInterval(do_timer);
+                theLeftSide.lastChild.style.backgroundColor = "red";
+            }
+        }
+    </script>
+</body>
+</html>
