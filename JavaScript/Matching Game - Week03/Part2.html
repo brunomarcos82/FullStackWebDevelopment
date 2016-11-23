@@ -18,43 +18,83 @@
   </style>
 </head>
 
-<body id="theBody" onload="generateFaces()">
+<body id="theBody" onload="generateFaces(5)">
   <h1> Matching Game </h1>
-  <p> Click on the extra similing face on the left. </p>
+  <h3> Click on the extra similing face on the left. </h3>
   <div id="leftSide" style="width:500px; height:500px">
-    LEFT
+    <!-- area handled by javascript to create the images (Left) -->
   </div>
   <div id="rightSide" style="width:500px; height:500px">
-
-    RIGHT
-
-
+    <!-- area handled by javascript to create the images (Right) -->
   </div>
 
 
   <script>
-    function generateFaces() {
-      var numberOfFaces = 5;
+    theBody = document.getElementsByTagName("body")[0];
 
-      function rand() {
-        var num;
-        num = Math.floor((Math.random() * 401));
-        return num;
-      }
+    function rand() {
+      var num;
+      num = Math.floor((Math.random() * 401));
+      return num;
+    }
+
+
+    function generateFaces(numberOfFaces) {
+
+      var theLeftSide = document.getElementById("leftSide");
+      var theRightSide = document.getElementById("rightSide");
+
+
+
+      delete_all_children()
 
       for (index = 0; index < numberOfFaces; index++) {
-        var theLeftSide = document.getElementById("leftSide");
         var theImg = document.createElement("img");
         theImg.src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
         theImg.style.top = rand() + "px";
         theImg.style.left = rand() + "px";
         theLeftSide.appendChild(theImg);
       }
+
+      var theNode = theLeftSide;
+      var theClone = theNode.cloneNode(true);
+      theClone.removeChild(theClone.lastChild);
+      theRightSide.appendChild(theClone); //append executed in the right side
+
+      theLeftSide.lastChild.onclick = function nextLevel(event) {
+
+        event.stopPropagation();
+
+        numberOfFaces += 5;
+
+        generateFaces(numberOfFaces);
+
+      };
+
+      theBody.onclick = function gameOver() {
+
+        alert("Game Over!");
+
+        theBody.onclick = null;
+
+        theLeftSide.lastChild.onclick = null;
+
+      };
+
+    };
+
+    function delete_all_children() {
+      var theNode1 = document.getElementById("leftSide");
+      while (theNode1.firstChild)
+        theNode1.removeChild(theNode1.firstChild);
+
+      var theNode2 = document.getElementById("rightSide");
+      while (theNode2.firstChild)
+        theNode2.removeChild(theNode2.firstChild);
     }
   </script>
-  <div style="position: absolute; top:50px; left:460px">
-    <button type="button" onclick="generateFaces()"> Click Here </button>
-  </div>
+
+
 
 </body>
 
