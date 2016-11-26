@@ -44,8 +44,6 @@
       var theLeftSide = document.getElementById("leftSide");
       var theRightSide = document.getElementById("rightSide");
 
-
-
       for (index = 0; index < numberOfFaces; index++) {
         var theImg = document.createElement("img");
         theImg.src = "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
@@ -54,7 +52,12 @@
         theLeftSide.appendChild(theImg);
       }
 
-    };
+      var theNode = theLeftSide;
+      var theClone = theNode.cloneNode(true);
+      theClone.removeChild(theClone.lastChild);
+      theRightSide.appendChild(theClone); //append executed in the right side
+
+    }
 
 
   </script>
